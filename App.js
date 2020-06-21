@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 
 import { Button, Card } from 'react-native-elements'
 
@@ -53,7 +53,16 @@ const DATA = [
 export default function App() {
 	const renderCard = item => {
 		return (
-			<Card key={item.id} image={{ uri: item.uri }}title={item.text} >
+			<Card
+				image={{ uri: item.uri }}
+				title={item.text}
+				containerStyle={{
+					backgroundColor: 'azure'
+				}}
+				imageStyle={{
+					marginHorizontal: 10
+				}}
+			>
 				<Text style={styles.text}>I can customize this further</Text>
 				<Button
 					icon={{ name: 'code', color: 'white' }}
@@ -64,15 +73,36 @@ export default function App() {
 		)
 	}
 
+	const renderNoMoreCards = () => (
+		<Card
+			title='No more cards!'
+			containerStyle={{
+				backgroundColor: 'azure'
+			}}
+		>
+			<Text>That was fun and stuff</Text>
+			<Button title='Get More' />
+		</Card>
+	)
+
+	const onSwipeRight = () => {}
+
+	const onSwipeLeft = () => {}
+
 	return (
 		<SafeAreaView forceInset={{ top: 'always' }} style={styles.container}>
-			<Deck data={DATA} renderCard={renderCard} />
+			<Deck
+				data={DATA}
+				renderCard={renderCard}
+				renderNoMoreCards={renderNoMoreCards}
+			/>
 		</SafeAreaView>
 	)
 }
 
 const styles = StyleSheet.create({
-	card: { backgroundColor: 'darkcyan' },
+	container: { },
+	card: { backgroundColor: 'darkcyan', top: 0 },
 	text: {
 		marginBottom: 20
 	}
